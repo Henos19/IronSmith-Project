@@ -8,13 +8,12 @@ export default class UserController {
     this.service = new UserService();
   }
 
-  /* async getUsers(_req: Request, res: Response) {
-    const products = await this.service.getProducts();
-    res.status(200).json(products);
-  } */
+  async userLogin(req: Request, res: Response) {
+    const { status, message } = await this.service.userLogin(req.body);
+    res.status(status).json({ token: message });
+  }
 
   async createUser(req: Request, res: Response): Promise<void> {
-    console.log(req.body);
     const { status, message } = await this.service.createUser(req.body);
     res.status(status).json({ token: message });
   }

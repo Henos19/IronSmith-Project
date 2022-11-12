@@ -10,7 +10,7 @@ export default class UserModel {
   }
 
   async getUserById(id: number): Promise<IUser | undefined> {
-    const mysql = 'SELECT * FROM Trybesmith.Users id = ?';
+    const mysql = 'SELECT * FROM Trybesmith.Users WHERE id = ?';
     const [[result]] = await this.connection
       .execute<IUser[] & RowDataPacket[][]>(mysql, [id]);
 

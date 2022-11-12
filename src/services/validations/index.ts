@@ -1,5 +1,5 @@
 import Joi, { ObjectSchema } from 'joi';
-import { IProduct, IUser } from '../../interfaces';
+import { ILogin, IProduct, IUser } from '../../interfaces';
 
 const checkErrorForStatus = (message: string): number => {
   if ((/required/g).test(message)) return 400;
@@ -21,4 +21,20 @@ const userSchema: ObjectSchema<IUser> = Joi.object({
   password: Joi.string().min(8).required(),
 });
 
-export default { checkErrorForStatus, productSchema, userSchema };
+const loginSchema: ObjectSchema<ILogin> = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+const createOrderSchema: ObjectSchema = Joi.object({
+  productsIds: Joi.array().required(),
+  userId: Joi.number(),
+});
+
+export default {
+  checkErrorForStatus,
+  productSchema,
+  userSchema,
+  loginSchema,
+  createOrderSchema,  
+};

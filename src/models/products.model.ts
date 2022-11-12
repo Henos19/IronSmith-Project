@@ -25,6 +25,14 @@ export default class ProductModel {
     return result;
   }
 
+  async updateProduct(id: number, orderId: number) {
+    const query = `UPDATE Trybesmith.Products
+      SET orderId = ?
+      WHERE id = ?;`;
+
+    await this.connection.execute<ResultSetHeader>(query, [orderId, id]);
+  }
+
   async createProduct(product: IProduct): Promise<IProduct> {
     const mysql = 'INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?)';
 

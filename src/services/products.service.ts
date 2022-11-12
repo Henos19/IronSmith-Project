@@ -25,7 +25,6 @@ export default class ProductService {
 
     if (error) {
       const status = this.validations.checkErrorForStatus(error.message);
-      console.log(error, error.message, status);
       throw new HttpRequestError(status, error.message);
     }
     
